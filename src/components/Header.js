@@ -23,6 +23,14 @@ export default function (props) {
         >
           Page-2
         </NavLink>
+        <NavLink
+          className="App-link"
+          exact={true}
+          to="/tall"
+          activeStyle={{ color: "red" }}
+        >
+          Tall
+        </NavLink>
       </div>
       <div className="App-header-middle">Welcome to my TEST app!</div>
       <div className="App-header-edge-right">

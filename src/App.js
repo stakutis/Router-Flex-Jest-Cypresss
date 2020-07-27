@@ -65,6 +65,43 @@ function App() {
     );
   };
 
+  const TallPage = (props) => {
+    return (
+      <div>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+        <p>Tall page</p>
+      </div>
+    );
+  };
+
   return (
     <div className="App">
       <Router>
@@ -81,6 +118,11 @@ function App() {
             </Route>
             <PrivateRoute exact path="/page1" component={Page1}></PrivateRoute>
             <PrivateRoute exact path="/page2" component={Page2}></PrivateRoute>
+            <PrivateRoute
+              exact
+              path="/tall"
+              component={TallPage}
+            ></PrivateRoute>
             <Redirect to="/nowhere" />
           </Switch>
         </div>

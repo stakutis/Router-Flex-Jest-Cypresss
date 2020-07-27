@@ -17,6 +17,7 @@ body {
   padding: 0px 10px;
   height: calc(100% - 80px * 2 - 2 * 10px);
   background-color: yellow;
+  overflow-y: auto;
 }
 
 .App-header {
@@ -39,6 +40,7 @@ body {
 .App-header-edge-left {
   padding: 0 20px;
   flex-basis: 20%;
+  background-color: orange;
 }
 
 .App-header-edge-right {
