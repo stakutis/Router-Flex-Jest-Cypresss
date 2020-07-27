@@ -1,3 +1,8 @@
+:root {
+  --banner-height: 50px;
+  --margin-spacing: 10px;
+}
+
 body {
   margin: 0; /* so we take up the whole screen width/height */
   padding: 0;
@@ -5,24 +10,24 @@ body {
 }
 
 .App {
-  margin: 10px 10px;
+  margin: var(--margin-spacing) 10px;
   background-color: blue;
-  height: calc(100vh - 10px * 2);
+  height: calc(100vh - var(--margin-spacing) * 2);
   display: flex;
   flex-direction: column;
 }
 
 .Main {
-  margin: 10px 10px;
+  margin: var(--margin-spacing) 10px;
   padding: 0px 10px;
-  height: calc(100% - 80px * 2 - 2 * 10px);
+  height: calc(100% - var(--banner-height) * 2 - 2 * var(--margin-spacing));
   background-color: yellow;
   overflow-y: auto;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 80px;
+  min-height: var(--banner-height);
   width: 100%;
   display: flex;
   align-items: center;
@@ -59,7 +64,7 @@ body {
 }
 
 .App-footer {
-  min-height: 80px;
+  min-height: var(--banner-height);
   justify-content: flex-end;
   padding-right: 40px;
   display: flex;
