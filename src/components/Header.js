@@ -32,7 +32,7 @@ export default function (props) {
           to="/login"
           activeStyle={{ color: "red" }}
         >
-          Login
+          Login/Out
         </NavLink>
       </div>
     </header>

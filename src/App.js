@@ -8,15 +8,62 @@ import {
 import "./App.css";
 import Header from "./components/Header";
 
+const auth = {
+  isAuthenticated: false,
+};
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  console.log(
+    "PrivateRoute: component:",
+    Component,
+    "rest:",
+    rest,
+    "auth:",
+    auth
+  );
+  if (!auth.isAuthenticated) alert("Please click Login FIRST!");
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        auth.isAuthenticated === true ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+  );
+};
+
 function App() {
-  const [loggedIn, setLogged] = useState(false);
   const Login = (props) => {
-    setLogged(!loggedIn);
+    console.log("Logggggggin");
+    if (auth.isAuthenticated) {
+      auth.isAuthenticated = false;
+      return <Redirect to="/" />;
+    }
+    auth.isAuthenticated = true;
     return <Redirect to="/page2" />;
-    return <div>Hi</div>;
   };
 
-  console.log("Rendering app, loggedIn:", loggedIn);
+  console.log("Rendering app, auth:", auth);
+
+  const Page1 = (props) => {
+    return (
+      <div>
+        This is page 1 {auth.isAuthenticated ? "authenticated" : "not authed"}
+      </div>
+    );
+  };
+
+  const Page2 = (props) => {
+    return (
+      <div>
+        This is page 2 {auth.isAuthenticated ? "authenticated" : "not authed"}
+      </div>
+    );
+  };
 
   return (
     <div className="App">
@@ -24,22 +71,17 @@ function App() {
         <Header />
         <div className="Main">
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/">
-              Logged-in? {loggedIn ? "Yes" : "Nah"}
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/nowhere">
+              No Where! {auth.isAuthenticated ? "authenticated" : "not authed"}
             </Route>
-            {/* loggedIn ? (
-              <>
-                <Route exact path="/page1">
-                  This is page 1
-                </Route>
-                <Route exact path="/page2">
-                  This is page 2; Logged-in? {loggedIn ? "Yes" : "Nah"}
-                </Route>
-              </>
-            ) : (
-              <Redirect to="/" />
-            )*/}
+            <Route exact path="/">
+              STAKUTIS ROOT auth:
+              {auth.isAuthenticated ? "authenticated" : "not authed"}
+            </Route>
+            <PrivateRoute exact path="/page1" component={Page1}></PrivateRoute>
+            <PrivateRoute exact path="/page2" component={Page2}></PrivateRoute>
+            <Redirect to="/nowhere" />
           </Switch>
         </div>
         <div className="App-footer">
