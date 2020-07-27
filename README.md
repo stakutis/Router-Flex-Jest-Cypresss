@@ -1,3 +1,11 @@
+# Router-Flex-Jest-Cypress
+
+A nice and simple app that shows rudimentary React Router/Link and lays out
+a typical web-type page with a header (and NavLinks), main body, and a fixed footer,
+all responsive; Then example Jest and Cypress tests.
+
+# Cypress tips...
+
 stakutis: npx cypress open
 http://docs.cypress.io/api
 Tips:
