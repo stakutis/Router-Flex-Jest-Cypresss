@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
+import ShowModalBackground, {
+  MessageModal,
+} from "./components/ShowModalBackground";
 
 const auth = {
   isAuthenticated: false,
@@ -65,6 +68,32 @@ function App() {
     );
   };
 
+  const Adv = (props) => {
+    const [showAd, setShowAd] = useState(true);
+    if (showAd)
+      return (
+        <div className="Adv">
+          This is an add
+          <br />
+          <button
+            onClick={(e) => {
+              setShowAd(false);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      );
+    return (
+      <MessageModal>
+        This is a test modal
+        <br />
+        Click outside and it should go away<p>Or click my button</p>
+        <button>My Button</button>
+      </MessageModal>
+    );
+  };
+
   const TallPage = (props) => {
     return (
       <div>
@@ -92,6 +121,8 @@ function App() {
         <p>Tall page</p>
         <p>Tall page</p>
         <p>Tall page</p>
+        <Adv />
+
         <p>Tall page</p>
         <p>Tall page</p>
         <p>Tall page</p>
@@ -115,6 +146,11 @@ function App() {
             <Route exact path="/">
               STAKUTIS ROOT auth:
               {auth.isAuthenticated ? "authenticated" : "not authed"}
+              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
             </Route>
             <PrivateRoute exact path="/page1" component={Page1}></PrivateRoute>
             <PrivateRoute exact path="/page2" component={Page2}></PrivateRoute>

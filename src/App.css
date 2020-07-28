@@ -45,11 +45,13 @@ body {
 .App-header-edge-left {
   padding: 0 20px;
   flex-basis: 20%;
+  font-size: 20px;
   background-color: orange;
 }
 
 .App-header-edge-right {
   padding: 0 20px;
+  font-size: 20px;
   text-align: right;
   flex-basis: 20%;
   background-color: red;
@@ -81,4 +83,16 @@ body {
   flex-grow: 1;
   text-align: right;
   margin: 0 40px;
+}
+
+.Adv {
+  background-color: grey;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  bottom: calc(20px + var(--banner-height) + var(--margin-spacing));
+  right: calc(20px + var(--margin-spacing));
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
 }
