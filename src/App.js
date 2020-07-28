@@ -88,7 +88,8 @@ function App() {
       <MessageModal>
         This is a test modal
         <br />
-        Click outside and it should go away<p>Or click my button</p>
+        Click anywhere on the page and it should go away
+        <p>Or click my button</p>
         <button>My Button</button>
       </MessageModal>
     );
@@ -105,10 +106,10 @@ function App() {
         <p>Tall page</p>
         <p>Tall page</p>
         <p>Tall page</p>
+        <p>Tall page Try to scroll down...</p>
         <p>Tall page</p>
         <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
+        <p>Tall page Make sure the banners and 'ad' stay in place...</p>
         <p>Tall page</p>
         <p>Tall page</p>
         <p>Tall page</p>
@@ -126,6 +127,18 @@ function App() {
         <p>Tall page</p>
         <p>Tall page</p>
         <p>Tall page</p>
+        <p>
+          Lots and lots to talk about....test test test ...Dont get the virus!!
+        </p>
+        <p>
+          Lots and lots to talk about....test test test ...Dont get the virus!!
+        </p>
+        <p>
+          Lots and lots to talk about....test test test ...Dont get the virus!!
+        </p>
+        <p>
+          Lots and lots to talk about....test test test ...Dont get the virus!!
+        </p>
         <p>Tall page</p>
         <p>Tall page</p>
         <p>Tall page</p>
