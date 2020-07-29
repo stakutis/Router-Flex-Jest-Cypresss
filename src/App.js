@@ -146,6 +146,43 @@ function App() {
     );
   };
 
+  const BorderedTextWithEmbeddedLabel = (props) => {
+    console.log("props:", props);
+    return (
+      <div
+        style={{
+          border: "3px solid black",
+          width: props.boxWidth,
+          padding: "5px",
+          position: "relative",
+        }}
+      >
+        <label
+          htmlFor="myText"
+          style={{
+            position: "absolute",
+            top: "-13px",
+            left: 8,
+            backgroundColor: "white",
+          }}
+        >
+          {props.label}
+        </label>
+        <input
+          type="text"
+          style={{
+            backgroundColor: "rgba(255,0,0,.5)",
+            width: "calc(100% - 20px)",
+            margin: 8,
+          }}
+          id="myText"
+          name="name"
+          placeholder={props.placeholder}
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="App">
       <Router>
@@ -162,6 +199,11 @@ function App() {
               <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
               <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
               <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+              <BorderedTextWithEmbeddedLabel
+                placeholder="My placeholder..."
+                boxWidth="400px"
+                label="This is my label"
+              />
               <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
               <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
             </Route>

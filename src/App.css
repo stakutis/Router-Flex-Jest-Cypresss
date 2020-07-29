@@ -20,6 +20,7 @@ body {
 .Main {
   margin: var(--margin-spacing) 10px;
   padding: 0px 10px;
+  min-height2: 100vh;
   height: calc(100% - var(--banner-height) * 2 - 2 * var(--margin-spacing));
   background-color: yellow;
   overflow-y: auto;
