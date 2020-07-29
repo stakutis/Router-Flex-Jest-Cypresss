@@ -153,7 +153,7 @@ function App() {
         style={{
           border: "3px solid black",
           width: props.boxWidth,
-          padding: "5px",
+          paddingTop: "5px",
           position: "relative",
         }}
       >
@@ -168,21 +168,77 @@ function App() {
         >
           {props.label}
         </label>
-        <input
-          type="text"
-          style={{
-            backgroundColor: "rgba(255,0,0,.5)",
-            width: "calc(100% - 20px)",
-            margin: 8,
-          }}
-          id="myText"
-          name="name"
-          placeholder={props.placeholder}
-        />
+        {props.children}
       </div>
     );
   };
 
+  const InitialRoute = (props) => {
+    const [myValue, setMyValue] = useState("Initial value");
+    console.log("RE Rendering ", myValue);
+
+    return (
+      <div>
+        "STAKUTIS ROOT auth:"
+        {auth.isAuthenticated ? "authenticated" : "not authed"}
+        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+        <form>
+          <input
+            type="text"
+            value={myValue}
+            style={{
+              backgroundColor: "rgba(255,0,0,.5)",
+              width: "calc(100% - 20px)",
+              margin: 0,
+            }}
+            id="myText"
+            name="name"
+            onChange={(e) => {
+              setMyValue(e.target.value);
+            }}
+            placeholder="Enter something please"
+          />
+        </form>
+        <p>go</p>
+        <form>
+          <BorderedTextWithEmbeddedLabel
+            placeholder="My placeholder..."
+            boxWidth="400px"
+            label="This is my label"
+          >
+            <input
+              type="text"
+              value={myValue}
+              style={{
+                backgroundColor: "rgba(255,0,0,.5)",
+                width: "calc(100% - 20px)",
+                margin: 0,
+              }}
+              id="myText"
+              name="name"
+              onChange={(e) => {
+                console.log("Making  update... ");
+                setMyValue(e.target.value);
+              }}
+              placeholder="Enter something please"
+            />
+            <input type="text" placeholder="Myplace" />
+            <button
+              onClick={(e) => {
+                alert("Clicked! Value:" + myValue);
+              }}
+            >
+              Click me!
+            </button>
+          </BorderedTextWithEmbeddedLabel>
+        </form>
+        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+      </div>
+    );
+  };
   return (
     <div className="App">
       <Router>
@@ -194,18 +250,7 @@ function App() {
               No Where! {auth.isAuthenticated ? "authenticated" : "not authed"}
             </Route>
             <Route exact path="/">
-              STAKUTIS ROOT auth:
-              {auth.isAuthenticated ? "authenticated" : "not authed"}
-              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-              <BorderedTextWithEmbeddedLabel
-                placeholder="My placeholder..."
-                boxWidth="400px"
-                label="This is my label"
-              />
-              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-              <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
+              <InitialRoute />
             </Route>
             <PrivateRoute exact path="/page1" component={Page1}></PrivateRoute>
             <PrivateRoute exact path="/page2" component={Page2}></PrivateRoute>
