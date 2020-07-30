@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -173,35 +173,65 @@ function App() {
     );
   };
 
+  const useMyHook = () => {
+    const [myValue, setMyValue] = useState(5);
+
+    useEffect(() => {
+      setInterval(() => {
+        setMyValue((prev) => {
+          return prev + 1;
+        });
+      }, 1000);
+    }, []);
+    return [myValue, setMyValue];
+  };
+
+  const wrapAComponent = (BaseComp) => (props) => {
+    console.log("wrapAComponent BaseComp:", BaseComp, "props:", props);
+    return (
+      <BaseComp {...props} name="stakutis">
+        <p>Wrapped; name value overriden</p>
+        <p>Wrapped: has children: {props.children}</p>
+      </BaseComp>
+    );
+  };
+
+  const InnerComponent = (props) => {
+    console.log("Render: InnerComponent props:", props);
+    return (
+      <div>
+        Inner Component <button>InnerButton</button>
+        <p>props.fish:{props.fish}</p>
+        <p>props.name:{props.name}</p>
+        <p>My children: {props.children}</p>
+      </div>
+    );
+  };
+
+  const UseHookExample = (props) => {
+    const [myValue, setMyValue] = useMyHook();
+    return <div>Value is w/sub-hook is {myValue}</div>;
+  };
+
   const InitialRoute = (props) => {
     const [myValue, setMyValue] = useState("Initial value");
     console.log("RE Rendering ", myValue);
-
+    let WrappedComponent = wrapAComponent(InnerComponent);
     return (
       <div>
         "STAKUTIS ROOT auth:"
         {auth.isAuthenticated ? "authenticated" : "not authed"}
-        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-        <form>
-          <input
-            type="text"
-            value={myValue}
-            style={{
-              backgroundColor: "rgba(255,0,0,.5)",
-              width: "calc(100% - 20px)",
-              margin: 0,
-            }}
-            id="myText"
-            name="name"
-            onChange={(e) => {
-              setMyValue(e.target.value);
-            }}
-            placeholder="Enter something please"
-          />
-        </form>
-        <p>go</p>
+        <p>--- use Hook example ----</p>
+        <UseHookExample />
+        <p>--- HOC example ----</p>
+        <InnerComponent fish="myfish" name="haha">
+          Inner component not wrapped
+        </InnerComponent>
+        <p>-------------------</p>
+        <WrappedComponent fish="food" name="haha">
+          Main Level Child
+        </WrappedComponent>
+        <p>----- Label-upper placement example --------------</p>
         <form>
           <BorderedTextWithEmbeddedLabel
             placeholder="My placeholder..."
@@ -234,8 +264,6 @@ function App() {
             </button>
           </BorderedTextWithEmbeddedLabel>
         </form>
-        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
-        <p>adfasfasfasdfsafsafsdfsdfsdfafasfsdafsdfs</p>
       </div>
     );
   };
