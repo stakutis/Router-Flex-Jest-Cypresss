@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import ShowModalBackground, {
   MessageModal,
 } from "./components/ShowModalBackground";
+import styled from "styled-components";
 
 const auth = {
   isAuthenticated: false,
@@ -213,6 +214,23 @@ function App() {
     return <div>Value is w/sub-hook is {myValue}</div>;
   };
 
+  // Styled component named StyledButton
+  const StyledButton = styled.button`
+    background-color: grey;
+    font-size: 12px;
+    color: white;
+  `;
+
+  function StyledComponent(props) {
+    // Use it like any other component.
+    return (
+      <p>
+        <StyledButton> This is a styled-component button </StyledButton>
+        {props.children}
+      </p>
+    );
+  }
+
   const InitialRoute = (props) => {
     const [myValue, setMyValue] = useState("Initial value");
     console.log("RE Rendering ", myValue);
@@ -221,6 +239,7 @@ function App() {
       <div>
         "STAKUTIS ROOT auth:"
         {auth.isAuthenticated ? "authenticated" : "not authed"}
+        <StyledComponent>eat me...</StyledComponent>
         <p>--- use Hook example ----</p>
         <UseHookExample />
         <p>--- HOC example ----</p>
