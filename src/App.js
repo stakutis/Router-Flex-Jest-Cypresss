@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,6 +11,7 @@ import Header from "./components/Header";
 import ShowModalBackground, {
   MessageModal,
 } from "./components/ShowModalBackground";
+import { DropDown, DropDownItem } from "./components/DropDown";
 import styled from "styled-components";
 
 const auth = {
@@ -224,7 +226,7 @@ function App() {
   function StyledComponent(props) {
     // Use it like any other component.
     return (
-      <p>
+      <p style={{ display: "block " }}>
         <StyledButton> This is a styled-component button </StyledButton>
         {props.children}
       </p>
@@ -233,13 +235,76 @@ function App() {
 
   const InitialRoute = (props) => {
     const [myValue, setMyValue] = useState("Initial value");
+    const [dropdownDisplay, setDropdownDisplay] = useState("none");
     console.log("RE Rendering ", myValue);
     let WrappedComponent = wrapAComponent(InnerComponent);
+
     return (
       <div>
         "STAKUTIS ROOT auth:"
         {auth.isAuthenticated ? "authenticated" : "not authed"}
-        <StyledComponent>eat me...</StyledComponent>
+        <p>---Component Dropdown button-------</p>
+        <button>Just a fake button</button>
+        <DropDown
+          label="Car Type"
+          dropDownStyle={{ width: 150, paddingLeft: 5 }}
+        >
+          <DropDownItem to="/page1" as={NavLink}>
+            Page1
+          </DropDownItem>
+          <DropDownItem to="/page2" as={NavLink}>
+            Page2
+          </DropDownItem>
+          <DropDownItem to="/tall">Tall</DropDownItem>
+        </DropDown>
+        <DropDown label="Color">
+          <div style={{ color: "red" }}>Red</div>
+          <DropDownItem style={{ color: "blue" }}>Blue </DropDownItem>
+          <div style={{ color: "black" }}>Ugly</div>
+        </DropDown>
+        <button>Just another fake button</button>
+        <p>---Dropdown button !-------</p>
+        <button>MYBUTTON FIRST</button>
+        <div
+          className="DropdownPickList"
+          onMouseEnter={(e) => setDropdownDisplay("inline-block")}
+          onMouseLeave={(e) => setDropdownDisplay("none")}
+        >
+          <div
+            className="DropdownBoxWrapper"
+            style={{ display: dropdownDisplay }}
+          >
+            <div className="DropdownBox">
+              <NavLink
+                className="Dropdown-link"
+                exact={true}
+                to="/page1"
+                activeStyle={{ color: "red" }}
+              >
+                Page-1
+              </NavLink>
+              <NavLink
+                className="Dropdown-link"
+                exact={true}
+                to="/page2"
+                activeStyle={{ color: "red" }}
+              >
+                Page-2
+              </NavLink>
+              <NavLink
+                className="Dropdown-link"
+                exact={true}
+                to="/tall"
+                activeStyle={{ color: "red" }}
+              >
+                Tall
+              </NavLink>
+            </div>
+          </div>
+          This is my drop down
+        </div>
+        <button>MYBUTTON SECOND</button>
+        <StyledComponent> eat me...</StyledComponent>
         <p>--- use Hook example ----</p>
         <UseHookExample />
         <p>--- HOC example ----</p>

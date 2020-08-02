@@ -66,6 +66,39 @@ body {
   margin-right: 10px;
 }
 
+.DropdownPickList {
+  display: inline;
+  width: 500px;
+  background-color: blue;
+  color: white;
+}
+
+.DropdownBoxWrapper {
+  position: absolute;
+}
+.DropdownBox {
+  position: relative;
+  top: 20px;
+  background-color: green;
+}
+
+.Dropdown-link {
+  display: block;
+  padding: 0.25em;
+  margin: 0 0px;
+  color: rgb(0, 183, 255);
+  transition: all 0.5s ease;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.Dropdown-link:hover {
+  background-color: brown;
+  color: white;
+  padding-left: 20px;
+  text-decoration: none;
+}
+
 .App-footer {
   min-height: var(--banner-height);
   justify-content: flex-end;

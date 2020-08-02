@@ -10,6 +10,14 @@ export default function (props) {
         <NavLink
           className="App-link"
           exact={true}
+          to="/"
+          activeStyle={{ color: "red" }}
+        >
+          H
+        </NavLink>
+        <NavLink
+          className="App-link"
+          exact={true}
           to="/page1"
           activeStyle={{ color: "red" }}
         >
