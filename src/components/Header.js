@@ -13,7 +13,7 @@ export default function (props) {
           to="/"
           activeStyle={{ color: "red" }}
         >
-          H
+          Home
         </NavLink>
         <NavLink
           className="App-link"
@@ -36,6 +36,7 @@ export default function (props) {
           exact={true}
           to="/tall"
           activeStyle={{ color: "red" }}
+          data-testid="link-TallPage"
         >
           Tall
         </NavLink>

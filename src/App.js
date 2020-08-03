@@ -8,10 +8,8 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
-import ShowModalBackground, {
-  MessageModal,
-} from "./components/ShowModalBackground";
 import { DropDown, DropDownItem } from "./components/DropDown";
+import { TallPage } from "./components/TallPage";
 import styled from "styled-components";
 
 const auth = {
@@ -44,7 +42,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
 function App() {
   const Login = (props) => {
-    console.log("Logggggggin");
     if (auth.isAuthenticated) {
       auth.isAuthenticated = false;
       return <Redirect to="/" />;
@@ -52,8 +49,6 @@ function App() {
     auth.isAuthenticated = true;
     return <Redirect to="/page2" />;
   };
-
-  console.log("Rendering app, auth:", auth);
 
   const Page1 = (props) => {
     return (
@@ -71,86 +66,7 @@ function App() {
     );
   };
 
-  const Adv = (props) => {
-    const [showAd, setShowAd] = useState(true);
-    if (showAd)
-      return (
-        <div className="Adv">
-          This is an add
-          <br />
-          <button
-            onClick={(e) => {
-              setShowAd(false);
-            }}
-          >
-            Cancel
-          </button>
-        </div>
-      );
-    return (
-      <MessageModal>
-        This is a test modal
-        <br />
-        Click anywhere on the page and it should go away
-        <p>Or click my button</p>
-        <button>My Button</button>
-      </MessageModal>
-    );
-  };
-
-  const TallPage = (props) => {
-    return (
-      <div>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page Try to scroll down...</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page Make sure the banners and 'ad' stay in place...</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <Adv />
-
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>
-          Lots and lots to talk about....test test test ...Dont get the virus!!
-        </p>
-        <p>
-          Lots and lots to talk about....test test test ...Dont get the virus!!
-        </p>
-        <p>
-          Lots and lots to talk about....test test test ...Dont get the virus!!
-        </p>
-        <p>
-          Lots and lots to talk about....test test test ...Dont get the virus!!
-        </p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-        <p>Tall page</p>
-      </div>
-    );
-  };
-
   const BorderedTextWithEmbeddedLabel = (props) => {
-    console.log("props:", props);
     return (
       <div
         style={{
@@ -190,17 +106,14 @@ function App() {
   };
 
   const wrapAComponent = (BaseComp) => (props) => {
-    console.log("wrapAComponent BaseComp:", BaseComp, "props:", props);
     return (
       <BaseComp {...props} name="stakutis">
-        <p>Wrapped; name value overriden</p>
-        <p>Wrapped: has children: {props.children}</p>
+        Wrapped; name value overriden Wrapped: has children: {props.children}
       </BaseComp>
     );
   };
 
   const InnerComponent = (props) => {
-    console.log("Render: InnerComponent props:", props);
     return (
       <div>
         Inner Component <button>InnerButton</button>
@@ -233,17 +146,56 @@ function App() {
     );
   }
 
-  const InitialRoute = (props) => {
+  const MyDropDown = (props) => {
+    // we could blend dropdownstyle first...
+    return (
+      <DropDown
+        labelStyle={{ backgroundColor: "blue", width: 200 }}
+        dropDownStyle={{
+          width: 150,
+          paddingLeft: 5,
+          backgroundColor: "green",
+          textAlign: "left",
+        }}
+        {...props}
+      >
+        {props.children}
+      </DropDown>
+    );
+  };
+
+  const Home = (props) => {
     const [myValue, setMyValue] = useState("Initial value");
     const [dropdownDisplay, setDropdownDisplay] = useState("none");
-    console.log("RE Rendering ", myValue);
     let WrappedComponent = wrapAComponent(InnerComponent);
 
     return (
       <div>
-        "STAKUTIS ROOT auth:"
-        {auth.isAuthenticated ? "authenticated" : "not authed"}
+        <h2>Welcome to a simple set of test/example code fragments</h2>
+        <p>
+          The tabs at the top: Home gets you here. The Tall one gets you to page
+          that is tall-enough to need scrolling and be sure that the bottom Nav
+          stays glued etc. The other two Links require you to be logged-in;
+          ensure it fails if not, and then click login.
+        </p>
+        <p>
+          Part of this test/suite/examples is automated testing, but Jest and
+          Cypresss. To run each do:
+          <ul>
+            <li> Jest: npm test</li>
+            <li> Cypresss GUI: npx cypress open</li>
+            <li> Or: npm run cypress -- CLI (or npx cypress run</li>
+          </ul>
+        </p>
+        What is your current authenticated state:{" "}
+        {auth.isAuthenticated ? "Authenticated" : "NOT authenticated"}
         <p>---Component Dropdown button-------</p>
+        <p>
+          Mouse-over the black buttons; Ensure dropdown occurs, mouse down and
+          ensure animates item; click and ensure visits the target page. Ensure
+          ALL 4 buttons go across the page, no breaking, and no movement when
+          mousing-over.
+        </p>
         <button>Just a fake button</button>
         <DropDown
           label="Car Type"
@@ -261,50 +213,103 @@ function App() {
           <div style={{ color: "red" }}>Red</div>
           <DropDownItem style={{ color: "blue" }}>Blue </DropDownItem>
           <div style={{ color: "black" }}>Ugly</div>
-        </DropDown>
+        </DropDown>{" "}
         <button>Just another fake button</button>
-        <p>---Dropdown button !-------</p>
-        <button>MYBUTTON FIRST</button>
-        <div
-          className="DropdownPickList"
-          onMouseEnter={(e) => setDropdownDisplay("inline-block")}
-          onMouseLeave={(e) => setDropdownDisplay("none")}
-        >
-          <div
-            className="DropdownBoxWrapper"
-            style={{ display: dropdownDisplay }}
-          >
-            <div className="DropdownBox">
-              <NavLink
-                className="Dropdown-link"
-                exact={true}
-                to="/page1"
-                activeStyle={{ color: "red" }}
-              >
-                Page-1
-              </NavLink>
-              <NavLink
-                className="Dropdown-link"
-                exact={true}
-                to="/page2"
-                activeStyle={{ color: "red" }}
-              >
-                Page-2
-              </NavLink>
-              <NavLink
-                className="Dropdown-link"
-                exact={true}
-                to="/tall"
-                activeStyle={{ color: "red" }}
-              >
-                Tall
-              </NavLink>
-            </div>
-          </div>
-          This is my drop down
-        </div>
-        <button>MYBUTTON SECOND</button>
+        <p>---- Layered dropdown component----------</p>
+        <p>Similar to above, but uses a wrapped-component to alter defaults</p>
+        <MyDropDown label="MyDropDown">
+          <div style={{ color: "red" }}>Red</div>
+          <DropDownItem style={{ color: "blue" }}>Blue </DropDownItem>
+          <div style={{ color: "black" }}>Ugly</div>
+        </MyDropDown>
+        <MyDropDown label="MyDropDown2">
+          <div style={{ color: "red" }}>Red</div>
+          <DropDownItem style={{ color: "blue" }}>Blue </DropDownItem>
+          <div style={{ color: "black" }}>Ugly</div>
+        </MyDropDown>
+        <button>Just another fake button</button>
         <StyledComponent> eat me...</StyledComponent>
+        <p>--Padding/Margin examples; W/O box-sizing:border-box</p>
+        <span
+          style={{
+            display: "inline-block",
+            padding: 0,
+            margin: 0,
+            width: "400px",
+            backgroundColor: "blue",
+            color: "white",
+            border: "3px solid black",
+          }}
+        >
+          No pad/marg
+        </span>
+        <button>next</button>
+        <p></p>
+        <span
+          style={{
+            display: "inline-block",
+            padding: 0,
+            margin: 0,
+            width: "400px",
+            backgroundColor: "blue",
+            color: "white",
+            border: "3px solid black",
+            padding: 30,
+          }}
+        >
+          pad30
+        </span>
+        <button>next</button>
+        <p></p>
+        <span
+          style={{
+            display: "inline-block",
+            padding: 0,
+            margin: 0,
+            width: 400,
+            backgroundColor: "blue",
+            color: "white",
+            border: "3px solid black",
+            margin: 30,
+          }}
+        >
+          marg30
+        </span>
+        <button>next</button>
+        <p></p>
+        <span
+          style={{
+            display: "inline-block",
+            width: 400,
+            backgroundColor: "blue",
+            color: "white",
+            border: "3px solid black",
+            margin: 30,
+            padding: 30,
+          }}
+        >
+          marg+pad30
+        </span>
+        <button>next</button>
+        <p></p>
+        <p>--- Now WITH box-sizing:border-box and padding...</p>
+        <span
+          style={{
+            display: "inline-block",
+            boxSizing: "border-box",
+            padding: 0,
+            margin: 0,
+            width: "400px",
+            backgroundColor: "blue",
+            color: "white",
+            border: "3px solid black",
+            padding: 30,
+          }}
+        >
+          pad30 w/border-box
+        </span>
+        <button>next</button>
+        <p></p>
         <p>--- use Hook example ----</p>
         <UseHookExample />
         <p>--- HOC example ----</p>
@@ -333,7 +338,6 @@ function App() {
               id="myText"
               name="name"
               onChange={(e) => {
-                console.log("Making  update... ");
                 setMyValue(e.target.value);
               }}
               placeholder="Enter something please"
@@ -362,15 +366,11 @@ function App() {
               No Where! {auth.isAuthenticated ? "authenticated" : "not authed"}
             </Route>
             <Route exact path="/">
-              <InitialRoute />
+              <Home />
             </Route>
             <PrivateRoute exact path="/page1" component={Page1}></PrivateRoute>
             <PrivateRoute exact path="/page2" component={Page2}></PrivateRoute>
-            <PrivateRoute
-              exact
-              path="/tall"
-              component={TallPage}
-            ></PrivateRoute>
+            <Route exact path="/tall" component={TallPage}></Route>
             <Redirect to="/nowhere" />
           </Switch>
         </div>
